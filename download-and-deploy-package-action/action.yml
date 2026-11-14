@@ -1,0 +1,32 @@
+name: download and deploy action
+description: Downloads and deploys an action
+inputs:
+    package-path:
+        required: true
+        type: string
+    artiact-name:
+        required: true
+        type: string
+    npm-deploy-token:
+        required: true
+        type: string
+
+runs:
+    using: composite
+    steps:
+        - uses: actions/checkout@v7
+        - uses: actions/setup-node@v7
+          with:
+            node-version: '24'
+            registry-url: 'https://registry.npmjs.org'
+        - uses: actions/download-artifact@v7
+          with:
+            name: ${{inputs.artifact-name}}
+            path: ${{inputs.package-path}}/dist
+        - run: |
+            cd $PACKAGE_PATH
+            npm publis --access public
+          shell: bash
+          env:
+            PACKAGE_PATH: ${{inputs.package-path}}
+            NODE_AUTH_TOKEN: ${{inputs.npm-deploy-token}}
