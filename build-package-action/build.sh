@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ls
+
 npm i
 
 cd $PACKAGE_PATH
