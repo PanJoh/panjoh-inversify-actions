@@ -12,10 +12,10 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v7
-    - uses: PanJoh/panjoh-inversify-actions/build-package-action@v1
+    - uses: PanJoh/panjoh-inversify-actions/build-package-action@v2
       with:
         prod: true
-        packge-path: ${{inputs.package-path}}
+        package-path: ${{inputs.package-path}}
     - uses: actions/upload-artifact@v7
       with:
         name: ${{inputs.artifact-name}}
